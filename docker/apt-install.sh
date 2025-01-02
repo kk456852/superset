@@ -34,6 +34,24 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 RESET='\033[0m'
 
+# 新版本的镜像源的配置文件在sources.list.d中的debian.sources
+cd /etc/apt/sources.list.d
+# 清空文件夹
+echo "" > debian.sources 
+# 写入清华镜像源
+echo "Types: deb
+URIs: https://mirrors.tuna.tsinghua.edu.cn/debian
+Suites: bookworm bookworm-updates bookworm-backports
+Components: main contrib non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+
+Types: deb
+URIs: https://security.debian.org/debian-security
+Suites: bookworm-security
+Components: main contrib non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg" > debian.sources 
+
+
 # Install packages with clean-up
 echo -e "${GREEN}Updating package lists...${RESET}"
 apt-get update -qq
