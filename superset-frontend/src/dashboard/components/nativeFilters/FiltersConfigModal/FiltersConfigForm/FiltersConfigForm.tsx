@@ -106,7 +106,7 @@ import {
 import { FILTER_SUPPORTED_TYPES, INPUT_WIDTH } from './constants';
 import DependencyList from './DependencyList';
 
-const FORM_ITEM_WIDTH = 260;
+const FORM_ITEM_WIDTH = 150;
 
 const TabPane = styled(Tabs.TabPane)`
   padding: ${({ theme }) => theme.gridUnit * 4}px 0px;
@@ -140,7 +140,7 @@ const controlsOrder: ControlKey[] = [
 ];
 
 export const StyledFormItem = styled(FormItem)<{ expanded: boolean }>`
-  width: ${({ expanded }) => (expanded ? '49%' : `${FORM_ITEM_WIDTH}px`)};
+  width: ${({ expanded }) => (expanded ? '30%' : `${FORM_ITEM_WIDTH}px`)};
   margin-bottom: ${({ theme }) => theme.gridUnit * 4}px;
 
   & .ant-form-item-label {
