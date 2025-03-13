@@ -121,7 +121,7 @@ export const createHandleSave =
         target.datasetId = formInputs.dataset.value;
       }
       if (formInputs.dataset && formInputs.column) {
-        target.column = { name: formInputs.column };
+        target.column = { name: formInputs.column, verbose : formInputs.verbose};
       }
 
       return {

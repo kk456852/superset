@@ -33,6 +33,7 @@ export interface NativeFiltersFormItem {
     label: string;
   };
   column: string;
+  verbose: string;
   controlValues: {
     [key: string]: any;
   };

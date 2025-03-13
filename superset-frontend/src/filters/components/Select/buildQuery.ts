@@ -33,6 +33,7 @@ const buildQuery: BuildQuery<PluginFilterSelectQueryFormData> = (
 ) => {
   const { search, coltypeMap } = options?.ownState || {};
   const { sortAscending, sortMetric } = { ...DEFAULT_FORM_DATA, ...formData };
+  const { verbose } = formData;
   return buildQueryContext(formData, baseQueryObject => {
     const { columns = [], filters = [] } = baseQueryObject;
     const extraFilters: QueryObjectFilterClause[] = [];
@@ -54,10 +55,11 @@ const buildQuery: BuildQuery<PluginFilterSelectQueryFormData> = (
     }
 
     const sortColumns = sortMetric ? [sortMetric] : columns;
+    const columnsWithVerbose = verbose ? [...columns, verbose] : columns;
     const query: QueryObject[] = [
       {
         ...baseQueryObject,
-        columns,
+        columns:   columnsWithVerbose,
         metrics: sortMetric ? [sortMetric] : [],
         filters: filters.concat(extraFilters),
         orderby:
