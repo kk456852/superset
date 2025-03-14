@@ -137,9 +137,23 @@ const controlsOrder: ControlKey[] = [
 ];
 
 export const StyledFormItem = styled(FormItem)`
-  width: 49%;
+  width: 48%;
   margin-bottom: ${({ theme }) => theme.gridUnit * 4}px;
 
+  & .ant-form-item-label {
+    padding-bottom: 0;
+  }
+
+  & .ant-form-item-control-input {
+    min-height: ${({ theme }) => theme.gridUnit * 10}px;
+  }
+`;
+
+
+export const StyledFormItemVerbose = styled(FormItem)`
+  width: 24%;
+  margin-bottom: ${({ theme }) => theme.gridUnit * 4}px;
+ 
   & .ant-form-item-label {
     padding-bottom: 0;
   }

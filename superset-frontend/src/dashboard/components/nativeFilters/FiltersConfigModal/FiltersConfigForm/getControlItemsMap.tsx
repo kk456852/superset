@@ -38,6 +38,7 @@ import {
 import { NativeFiltersForm, NativeFiltersFormItem } from '../types';
 import {
   StyledFormItem,
+  StyledFormItemVerbose,
   StyledLabel,
   StyledRowFormItem,
 } from './FiltersConfigForm';
@@ -104,7 +105,7 @@ export default function getControlItemsMap({
               filterToEdit?.requiredFirst
             }
           />
-          <StyledFormItem
+          <StyledFormItemVerbose
             // don't show the column select unless we have a dataset
             name={['filters', filterId, 'column']}
             initialValue={initColumn}
@@ -137,9 +138,8 @@ export default function getControlItemsMap({
                 forceUpdate();
               }}
             />
-          </StyledFormItem>
-          <StyledFormItem
-            expanded={expanded}
+          </StyledFormItemVerbose>
+          <StyledFormItemVerbose
             // don't show the column select unless we have a dataset
             name={['filters', filterId, 'verbose']}
             initialValue={initVerbose}
@@ -165,10 +165,9 @@ export default function getControlItemsMap({
                   defaultDataMask: null,
                 });
                 forceUpdate();
-                formChanged();
               }}
             />
-          </StyledFormItem>
+          </StyledFormItemVerbose>
         </>
       );
       mapMainControlItems[mainControlItem.name] = {
