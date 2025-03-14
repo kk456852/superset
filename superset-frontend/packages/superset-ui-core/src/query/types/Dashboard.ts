@@ -21,7 +21,7 @@ import { AdhocFilter, DataMask } from '@superset-ui/core';
 
 export interface NativeFilterColumn {
   name: string;
-  displayName?: string;
+  verbose?: string;
 }
 
 export interface NativeFilterScope {

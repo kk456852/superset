@@ -116,8 +116,9 @@ const FilterValue: React.FC<FilterControlProps> = ({
   const {
     datasetId,
     column = {},
-  }: Partial<{ datasetId: number; column: { name?: string } }> = target;
+  }: Partial<{ datasetId: number; column: { name?: string, verbose?: string} }> = target;
   const { name: groupby } = column;
+  const { verbose: verbose } = column;
   const hasDataSource = !!datasetId;
   const [isLoading, setIsLoading] = useState<boolean>(hasDataSource);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -151,6 +152,7 @@ const FilterValue: React.FC<FilterControlProps> = ({
       adhoc_filters,
       time_range,
       dashboardId,
+      verbose,
     });
     const filterOwnState = filter.dataMask?.ownState || {};
     // TODO: We should try to improve our useEffect hooks to depend more on

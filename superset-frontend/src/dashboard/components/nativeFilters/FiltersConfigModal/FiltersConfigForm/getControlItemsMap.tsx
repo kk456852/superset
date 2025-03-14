@@ -92,6 +92,7 @@ export default function getControlItemsMap({
         filterToEdit?.controlValues?.[mainControlItem.name] ??
         mainControlItem?.config?.default;
       const initColumn = filterToEdit?.targets[0]?.column?.name;
+      const initVerbose = filterToEdit?.targets[0]?.column?.verbose;
 
       const element = (
         <>
@@ -134,6 +135,37 @@ export default function getControlItemsMap({
                   defaultDataMask: null,
                 });
                 forceUpdate();
+              }}
+            />
+          </StyledFormItem>
+          <StyledFormItem
+            expanded={expanded}
+            // don't show the column select unless we have a dataset
+            name={['filters', filterId, 'verbose']}
+            initialValue={initVerbose}
+            label={
+              <StyledLabel>
+                {t('Verbose')}
+              </StyledLabel>
+            }
+            data-test="field-input"
+          >
+            <ColumnSelect
+              mode={mainControlItem.config?.multiple && 'multiple'}
+              form={form}
+              filterId={filterId}
+              datasetId={datasetId}
+              formField="verbose"
+              filterValues={column =>
+                doesColumnMatchFilterType(formFilter?.filterType || '', column)
+              }
+              onChange={() => {
+                // We need reset default value when column changed
+                setNativeFilterFieldValues(form, filterId, {
+                  defaultDataMask: null,
+                });
+                forceUpdate();
+                formChanged();
               }}
             />
           </StyledFormItem>

@@ -882,17 +882,17 @@ const FiltersConfigForm = (
                 initialValue={
                   datasetDetails
                     ? {
-                        label: DatasetSelectLabel({
-                          id: datasetDetails.id,
-                          table_name: datasetDetails.table_name,
-                          schema: datasetDetails.schema,
-                          database: {
-                            database_name:
-                              datasetDetails.database.database_name,
-                          },
-                        }),
-                        value: datasetDetails.id,
-                      }
+                      label: DatasetSelectLabel({
+                        id: datasetDetails.id,
+                        table_name: datasetDetails.table_name,
+                        schema: datasetDetails.schema,
+                        database: {
+                          database_name:
+                            datasetDetails.database.database_name,
+                        },
+                      }),
+                      value: datasetDetails.id,
+                    }
                     : undefined
                 }
                 rules={[

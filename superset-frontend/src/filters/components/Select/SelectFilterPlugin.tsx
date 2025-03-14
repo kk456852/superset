@@ -110,6 +110,7 @@ export default function PluginFilterSelect(props: PluginFilterSelectProps) {
     [formData.groupby],
   );
   const [col] = groupby;
+  const verbose = formData.verbose;
   const [initialColtypeMap] = useState(coltypeMap);
   const [search, setSearch] = useState('');
   const [dataMask, dispatchDataMask] = useImmerReducer(reducer, {
@@ -205,11 +206,6 @@ export default function PluginFilterSelect(props: PluginFilterSelectProps) {
     [updateDataMask],
   );
 
-  const placeholderText =
-    data.length === 0
-      ? t('No data')
-      : tn('%s option', '%s options', data.length, data.length);
-
   const formItemExtra = useMemo(() => {
     if (filterState.validateMessage) {
       return (
@@ -222,9 +218,18 @@ export default function PluginFilterSelect(props: PluginFilterSelectProps) {
   }, [filterState.validateMessage, filterState.validateStatus]);
 
   const uniqueOptions = useMemo(() => {
-    const allOptions = new Set([...data.map(el => el[col])]);
-    return [...allOptions].map((value: string) => ({
-      label: labelFormatter(value, datatype),
+    const optionMap = new Map<string, string>();
+
+    data.forEach((item) => {
+      const value = item[col];       // 选项的实际值（如数据库ID）
+      const labelValue = item[verbose]; // 选项显示文本（如用户名）
+      if (value !== undefined && !optionMap.has(String(value))) {
+        optionMap.set(String(value), String(labelValue ?? ''));
+      }
+    });
+    
+    return Array.from(optionMap, ([value, label]) => ({
+      label: labelFormatter(label, datatype), 
       value,
       isNewOption: false,
     }));
@@ -240,6 +245,11 @@ export default function PluginFilterSelect(props: PluginFilterSelectProps) {
     }
     return uniqueOptions;
   }, [multiSelect, search, uniqueOptions]);
+
+  const placeholderText =
+  data.length === 0
+    ? t('No data')
+    : tn('%s option', '%s options', options.length, options.length);
 
   const sortComparator = useCallback(
     (a: AntdLabeledValue, b: AntdLabeledValue) => {

@@ -57,6 +57,7 @@ export const getFormData = ({
   type,
   dashboardId,
   id,
+  verbose,
 }: Partial<Filter> & {
   dashboardId: number;
   datasetId?: number;
@@ -64,17 +65,22 @@ export const getFormData = ({
   groupby?: string;
   adhoc_filters?: AdhocFilter[];
   time_range?: string;
+  verbose?: string;
 }): Partial<QueryFormData> => {
   const otherProps: {
     datasource?: string;
     groupby?: string[];
     sortMetric?: string;
+    verbose?: string;
   } = {};
   if (datasetId) {
     otherProps.datasource = `${datasetId}__table`;
   }
   if (groupby) {
     otherProps.groupby = [groupby];
+  }
+  if (verbose) {
+    otherProps.verbose = verbose;
   }
   if (sortMetric) {
     otherProps.sortMetric = sortMetric;
